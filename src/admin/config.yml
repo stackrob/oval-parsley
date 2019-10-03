@@ -1,0 +1,342 @@
+backend:
+  name: git-gateway
+  branch: master
+media_folder: src/images
+public_folder: /images
+collections:
+  - name: site_data
+    label: Site Data
+    files:
+      - name: site_data
+        label: Site Data
+        file: src/_data/site.json
+        fields:
+          - widget: string
+            name: name
+            label: Site Name
+            required: true
+          - widget: string
+            name: url
+            label: Site Url
+            required: true
+          - widget: string
+            name: authorName
+            label: Author Name
+            required: true
+          - widget: string
+            name: authorEmail
+            label: Author Email Address
+            required: true
+          - widget: string
+            name: authorHandle
+            label: Author Twitter Handle
+            required: false
+          - widget: text
+            name: shortDesc
+            label: Footer Short Description
+            required: true
+          - widget: number
+            name: maxPostsPerPage
+            label: Maximum Posts Per Page
+            required: true
+            default: 5
+            valueType: int
+          - widget: boolean
+            name: showThemeCredit
+            label: Show Theme Credit
+            required: true
+            default: true
+          - widget: boolean
+            name: enableThirdPartyComments
+            label: Enable Third Party Comments Area
+            required: true
+            default: false
+  - name: navigation
+    label: Navigation
+    files:
+      - name: navigation
+        label: Navigation
+        file: src/_data/navigation.json
+        fields:
+          - widget: list
+            name: items
+            label: Items
+            required: true
+            fields:
+              - widget: string
+                name: text
+                label: Text
+                required: true
+              - widget: string
+                name: url
+                label: Url
+                required: true
+              - widget: boolean
+                name: external
+                label: Is url to external site?
+                required: false
+  - name: settings
+    label: Theme Settings
+    files:
+      - name: settings
+        label: Theme Settings
+        file: src/_data/tokens.json
+        fields:
+          - widget: object
+            name: size-scale
+            label: Size Scale
+            required: true
+            fields:
+              - widget: string
+                name: base
+                label: Base Size
+                required: true
+                default: 1rem
+              - widget: string
+                name: '300'
+                label: 'Ratio: 300'
+                required: true
+                default: 0.8rem
+              - widget: string
+                name: '500'
+                label: 'Ratio: 500'
+                required: true
+                default: 1.25rem
+              - widget: string
+                name: '600'
+                label: 'Ratio: 600'
+                required: true
+                default: 1.56rem
+              - widget: string
+                name: '700'
+                label: 'Ratio: 700'
+                required: true
+                default: 1.95rem
+              - widget: string
+                name: '800'
+                label: 'Ratio: 800'
+                required: true
+                default: 2.44rem
+              - widget: string
+                name: '900'
+                label: 'Ratio: 900'
+                required: true
+                default: 3.05rem
+              - widget: string
+                name: max
+                label: Max Size
+                required: true
+                default: 4rem
+          - widget: object
+            name: colors
+            label: Colors
+            required: true
+            fields:
+              - widget: string
+                name: primary
+                label: Primary
+                required: true
+                default: '#173854'
+              - widget: string
+                name: primary-shade
+                label: Primary Shade (darker)
+                required: true
+                default: '#102538'
+              - widget: string
+                name: primary-glare
+                label: Primary Glare (lighter)
+                required: true
+                default: '#22547c'
+              - widget: string
+                name: highlight
+                label: Highlight
+                required: true
+                default: '#fedb8b'
+              - widget: string
+                name: light
+                label: Light
+                required: true
+                default: '#ffffff'
+              - widget: string
+                name: mid
+                label: Mid
+                required: true
+                default: '#cccccc'
+              - widget: string
+                name: dark
+                label: Dark
+                required: true
+                default: '#333333'
+              - widget: string
+                name: slate
+                label: Slate
+                required: true
+                default: '#404040'
+          - widget: hidden
+            name: fonts
+            label: Fonts
+            required: true
+  - name: home
+    label: Homepage
+    files:
+      - name: home
+        label: Homepage
+        file: src/index.md
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+          - widget: string
+            name: metaTitle
+            label: SEO Meta Title
+            required: false
+          - widget: string
+            name: metaDesc
+            label: SEO Meta Description
+            required: false
+          - widget: image
+            name: socialImage
+            label: Social Image
+            required: false
+          - widget: string
+            name: postsHeading
+            label: Post Feed Heading
+            required: true
+            default: Latest posts
+          - widget: string
+            name: archiveButtonText
+            label: Archive Link Text
+            required: true
+            default: See all posts
+          - widget: hidden
+            name: layout
+            label: Layout
+            required: true
+            default: home
+          - widget: markdown
+            name: body
+            label: Content
+            required: false
+            hint: Page content
+  - name: page
+    label: Pagess
+    folder: src/pages
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+      - widget: string
+        name: metaTitle
+        label: SEO Meta Title
+        required: false
+      - widget: string
+        name: metaDesc
+        label: SEO Meta Description
+        required: false
+      - widget: image
+        name: socialImage
+        label: Social Image
+        required: false
+      - widget: string
+        name: permalink
+        label: Permalink Override
+        required: false
+      - widget: hidden
+        name: layout
+        label: Layout
+        required: true
+        default: layouts/page.njk
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: layout
+      value: layouts/page.njk
+  - name: post
+    label: Postss
+    folder: src/posts
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+      - widget: string
+        name: metaTitle
+        label: SEO Meta Title
+        required: false
+      - widget: string
+        name: metaDesc
+        label: SEO Meta Description
+        required: false
+      - widget: image
+        name: socialImage
+        label: Social Image
+        required: false
+      - widget: datetime
+        name: date
+        label: Publish Date
+        required: true
+      - widget: list
+        name: tags
+        label: Tags
+        required: true
+        field:
+          label: String
+          name: string
+          widget: string
+      - widget: hidden
+        name: layout
+        label: Layout
+        required: true
+        default: layouts/post.njk
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: layout
+      value: layouts/post.njk
+  - name: archive
+    label: Posts Archive
+    files:
+      - name: archive
+        label: Posts Archive
+        file: src/archive.md
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+          - widget: string
+            name: metaTitle
+            label: SEO Meta Title
+            required: false
+          - widget: string
+            name: metaDesc
+            label: SEO Meta Description
+            required: false
+          - widget: image
+            name: socialImage
+            label: Social Image
+            required: false
+          - widget: hidden
+            name: layout
+            label: Layout
+            required: true
+            default: layouts/archive.njk
+          - widget: markdown
+            name: body
+            label: Content
+            required: false
+            hint: Page content
